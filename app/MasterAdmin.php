@@ -22,7 +22,7 @@ class MasterAdmin extends Model implements AuthenticatableContract
         'id', 'name', 'email','password'
     ];
 	
-	const ADMIN_EMAIL = 'admin@grow.com';
+	const ADMIN_EMAIL = 'grow@admin.com';
 	//const ADMIN_EMAIL = 'snse.shruti@gmail.com';
 
 
@@ -31,4 +31,9 @@ class MasterAdmin extends Model implements AuthenticatableContract
         $this->attributes['password'] = Hash::make($value);
     }
 
+    public static function getLoginAdminDetail()
+    {
+      $admin = Auth::guard('admin')->user();
+      return $admin;
+    }
 }

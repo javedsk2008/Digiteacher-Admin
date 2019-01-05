@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -27,25 +28,29 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = '/home';
-     protected $table = 'master_users';
 
+    protected $table = 'master_admin';
+
+
+    public function guard()
+    {
+        echo "hehehehhhhhhhhhhhhhhhhhhhhhhhh";
+        return Auth::guard('admin');
+    }
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('guest')->except('logout');
-    }*/
-
-
-
-
-    public function guard()
-    {
-        return Auth::guard('admin');
     }
-
+/*
+    public function username()
+    {
+        return 'username';
+    }
+    */
 }

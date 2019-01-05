@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\MasterAdmin;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -11,10 +13,6 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -23,6 +21,13 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $admin = Auth::guard('admin')->user();
+        if($admin->status!=1)
+        {
+            Auth::logout();
+            return redirect('/login')->with('message','Account Deactivated');
+            exit();
+        }
         return view('home');
     }
 }

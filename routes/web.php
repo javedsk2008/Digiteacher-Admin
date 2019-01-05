@@ -16,10 +16,8 @@ Route::get('reset_password/{token}', ['as' => 'password.reset', function($token)
     // implement your reset password route here!
 }]);
 
-Route::get('/', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+Route::get('/','LoginContoller@showLogin');
 Auth::routes();
-
-Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 
 Route::group(['middleware' => ['master_admin']], function () 
 {
