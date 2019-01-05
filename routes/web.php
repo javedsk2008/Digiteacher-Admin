@@ -16,10 +16,16 @@ Route::get('reset_password/{token}', ['as' => 'password.reset', function($token)
     // implement your reset password route here!
 }]);
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login', ['as' => 'login', 'uses' => 'Auth\LoginController@showLoginForm']);
+
+Route::group(['middleware' => ['master_admin']], function () 
+{
+
+    Route::get('/home', 'HomeController@index');
+
+
+
+});
